@@ -1,7 +1,14 @@
 import { useState } from 'react';
 
 function Account() {
-  const [settings, setSettings] = useState({
+  type Settings = {
+    phoneNumber: boolean;
+    email: boolean;
+    lawyerId: boolean;
+    location: boolean;
+    googleCalendar: boolean;
+  };
+  const [settings, setSettings] = useState<Settings>({
     phoneNumber: true,
     email: true,
     lawyerId: false,
@@ -118,24 +125,24 @@ function Account() {
         <p className="text-gray-400 mb-6">Choose what you want to show to other lawyers and users</p>
         
         <div className="space-y-4">
-          {Object.entries(settings).map(([key, value]) => (
-            <div key={key} className="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
-              <span className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-              <button
-                className={`w-12 h-6 rounded-full p-1 transition-colors duration-200 ease-in-out ${
-                  value ? 'bg-yellow-500' : 'bg-gray-700'
-                }`}
-                onClick={() => setSettings(prev => ({ ...prev, [key]: !prev[key] }))}
-              >
-                <div
-                  className={`w-4 h-4 bg-white rounded-full transform transition-transform duration-200 ease-in-out ${
-                    value ? 'translate-x-6' : 'translate-x-0'
-                  }`}
-                />
-              </button>
-            </div>
-          ))}
+      {Object.entries(settings).map(([key, value]) => (
+        <div key={key} className="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
+          <span className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+          <button
+            className={`w-12 h-6 rounded-full p-1 transition-colors duration-200 ease-in-out ${
+              value ? 'bg-yellow-500' : 'bg-gray-700'
+            }`}
+            onClick={() => setSettings(prev => ({ ...prev, [key as keyof Settings]: !prev[key as keyof Settings] }))}
+          >
+            <div
+              className={`w-4 h-4 bg-white rounded-full transform transition-transform duration-200 ease-in-out ${
+                value ? 'translate-x-6' : 'translate-x-0'
+              }`}
+            />
+          </button>
         </div>
+      ))}
+    </div>
       </div>
     </div>
   );
