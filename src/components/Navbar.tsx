@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className="bg-[#0A051F] py-4 px-6 border-b border-gray-800">
       
-        <div className="flex justify-end gap-9">
+        <div className="flex-1 sm:flex justify-center sm:justify-end gap-6 sm:gap-10">
           <Link to="/" className={`${location.pathname === '/' ? 'text-yellow-500' : 'text-white'}`}>
             Home
           </Link>
