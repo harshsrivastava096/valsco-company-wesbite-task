@@ -11,12 +11,13 @@ import ContactUs from './pages/ContactUs';
 import Account from './pages/Account';
 import Feedback from './pages/Feedback';
 
+import './App.css'
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#0A051F] text-white">
+      <div className="min-h-screen bg-none text-white">
         <Navbar />
-        <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto p-12">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/all-cases" element={<AllCases />} />
@@ -36,3 +37,4 @@ function App() {
 }
 
 export default App;
+

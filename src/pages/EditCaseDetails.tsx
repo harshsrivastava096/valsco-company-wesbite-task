@@ -1,7 +1,45 @@
 import { ArrowLeft, Pencil } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import SavePopup from './SavePopup';
 
 function EditCaseDetails() {
+  const [formData, setFormData] = useState({
+    caseNumber: '',
+    caseName: '',
+    hearingDate: '',
+    courtName: '',
+    partyContactNumber: '',
+    respondentName: '',
+    petitionerName: ''
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+  
+  useEffect(() => {
+    const savedData = localStorage.getItem('caseDetails');
+    if (savedData) {
+      setFormData(JSON.parse(savedData));
+    }
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSave = () => {
+    setShowPopup(true);
+  };
+
+  const confirmSave = () => {
+    localStorage.setItem('caseDetails', JSON.stringify(formData));
+    setShowPopup(false);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -12,10 +50,10 @@ function EditCaseDetails() {
           <h1 className="text-2xl font-bold text-yellow-500">Edit Case Details</h1>
         </div>
         <div className="space-x-4">
-          <button className="bg-white text-black px-4 py-2 rounded-lg">
+        <button className="bg-transparent text-white border-x-2 border-y-2  px-4 py-2 rounded-lg">
             Edit Notes
           </button>
-          <button className="bg-yellow-500 text-black px-4 py-2 rounded-lg">
+          <button className="bg-yellow-500 text-black px-4 py-2 rounded-lg" onClick={handleSave}>
             Save
           </button>
         </div>
@@ -29,7 +67,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="caseNumber"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -40,7 +80,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="caseName"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -51,7 +93,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="hearingDate"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -62,7 +106,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="courtName"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -75,7 +121,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="partyContactNumber"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -86,7 +134,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="respondentName"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -97,7 +147,9 @@ function EditCaseDetails() {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="123456789"
+                  name="petitionerName"
+                  value='123456789'
+                  onChange={handleInputChange}
                   className="w-full bg-gray-900 rounded-lg py-2 px-4 text-white pr-10"
                 />
                 <Pencil className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
@@ -106,6 +158,12 @@ function EditCaseDetails() {
           </div>
         </div>
       </div>
+      {showPopup && (
+        <SavePopup 
+          onConfirm={confirmSave}
+          onCancel={() => setShowPopup(false)}
+        />
+      )}
     </div>
   );
 }
