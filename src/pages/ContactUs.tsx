@@ -52,11 +52,6 @@ function ContactUs() {
           </div>
         </div>
       </div>
-      <div className='max-w-2xl mx-auto flex items-center justify-center mt-'>
-        <Link to="/feedback" className="text-black hover:text-white">
-            <button className='text-[12px] border-none rounded p-2 m-auto bg-slate-500' type="button">FeedBack</button>
-        </Link>
-      </div>
     </div>
   );
 }

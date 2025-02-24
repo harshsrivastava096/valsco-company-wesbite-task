@@ -12,12 +12,12 @@ function Navbar() {
   };
 
   return (
-    <nav className="py-4 px-4 border-none border-gray-800">
+    <nav className="py-8 px-14 border-none border-gray-800">
       <div className="flex sm:flex-row justify-between">
         {/* Logo on the left */}
         <div className="headlog">
           <NavLink to="/">
-            <img className="flex justify-center items-center p-1 w-auto h-12" src={JuridentLogo} alt="logo" />
+            <img className="flex justify-center items-center p-1 h-[50px] w-[120px]" src={JuridentLogo} alt="logo" />
           </NavLink>
         </div>
         
@@ -27,7 +27,7 @@ function Navbar() {
           <div className="sm:hidden" >
             <button onClick={toggleMenu} className="text-white focus:outline-none">
                 {/* Hamburger Icon */}
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
